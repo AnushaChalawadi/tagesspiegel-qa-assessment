@@ -23,11 +23,10 @@ Get Registration Link From Email
     ...    imap_server=${IMAP_SERVER}
     ...    imap_port=${iMAP_PORT}
 
-    Select Mailbox    INBOX
+    # Select Mailbox    INBOX
                 
     ${registration_link}=   Wait For Registration Email    ${recipient_email}
 
-    Close Mailbox
     RETURN    ${registration_link}
 
 # This keyword will be retried until it succeeds or the timeout is reached
@@ -38,7 +37,7 @@ Wait For Registration Email
     ${link}=    Wait Until Keyword Succeeds
     ...    2 min    
     ...    10 s    
-    ...    Get Registration Link From Latest Email    ${recipient_email}
+    ...    Get Registration Link Once    ${recipient_email}
 
     RETURN    ${link}
 
@@ -54,8 +53,7 @@ Get Registration Link Once
     ...    from the latest email sent to the specified recipient without waiting.
     [Arguments]    ${recipient_email}
 
-    ${messages}=    List Messages
-    ...    criterion=UNSEEN SUBJECT "Tagesspiegel"
+    ${messages}=    List Messages    criterion=UNSEEN SUBJECT "tagesspiegel"
 
     Should Not Be Empty    ${messages}    No emails found for recipient: ${recipient_email}
 
@@ -75,8 +73,8 @@ Extract Registration Link From Email Body
     ${links}=      Get Regexp Matches    ${body}    https?://[^\\s"'<>]+
     FOR    ${link}    IN    @{links}
         ${is_registration_link}=    Run Keyword And Return Status
-        ...    Should Match    ${link}    .*(registration|set-password).*
-        IF    'registration' in ${link} or 'set-password' in ${link}
+        ...    Should Match Regexp    ${link}    (?i)(registr|confirm|verify|activate|token)
+        IF    ${is_registration_link}
             Log    Registration link found: ${link}
             RETURN    ${link}
         END

@@ -1,33 +1,55 @@
 # Tagesspiegel E2E Registration Automation Using Robot Framework
 
-This project contains the e2e automation framework for testing user registration on tagesspiegel.de using the Page Object Model(POM) design pattern.
-
 ## Overview
-Automated testing framework that covers the complete user registration flow including email verification, new password setup and login confirmation.
+This project automates the end-to-end user registration flow on 'tagesspiegel.de' using the Robot Framework and Page Object Model(POM) design pattern.
 
-## Teck Stack
-- Test Automation Framework - Robot Framework
-- Browser Library - SeleniumLibrary
-- RPA Framework - 
-- Python
-- Python
+The Framework validates
+- User registration
+- Email verification via Gmail
+- Password setup
+- Successful login confirmation
 
-## Design Pattern
-This frameowork implements Page Object Model(POM) design pattern:
-- Page Objects (pages/) - Encapsulate page elements and actions for each web page
-- Test Cases (tests/) - Business logic and test scenarios
-- Resources (resources/) - Shared keywords, utilies and email helper
-- Variables (variables/) - Environment specific settings
+It is designed to be maintained, scalable.
+
+## Tech Stack
+- Test Automation Framework : Robot Framework 7.4.1
+- Browser Automation Library : SeleniumLibrary
+- Email Automation : RPA.Email.ImapSmtp (rpaframework)
+- Programming Language : Python 3.13.5 
+
+## Design Pattern - Page Object Model(POM)
+This framework implements Page Object Model(POM) design pattern:
+- pages/ -> Encapsulate page elements and actions for each web page
+- tests/ -> Business logic and test scenarios
+- resources/ -> Shared keywords, utilities and email helper
+- variables/ -> Environment-specific configuration
 
 ## Benefits of POM
 - Improved code maintainability
 - Reduced code duplication
 - Easy to update when UI changes
 - Better test readability
+- Clean separation of concerns
 
-## Prerequistics
+## Environment Configuration
+This framework supports multiple environments
+``` ENVIRONMENTS:
+  PROD:
+    BASE_URL: "https://www.tagesspiegel.de/"
+  STAGING:
+    BASE_URL: "https://staging.tagesspiegel.de/"
+  TEST1:
+    BASE_URL: "https://test1.tagesspiegel.de/"
+```
+Environment configuration is maintained inside the variables/ directory
+
+## Supported Browsers
+- Chrome (default)
+- Firefox
+
+## Prerequisites
 Before setting up the framework, ensure you have:
-- Python
+- Python 3.13+ installed
 - pip
 - Gmail Account with 2-step verification enabled
 - Gmail App Password generated
@@ -35,13 +57,17 @@ Before setting up the framework, ensure you have:
 ## Project Structure
 
 ## Setup Instructions
-### Step1:  Initial Setup
-- Clone the repository
+### Step1: Clone Repository
 ```
     git clone <repositoryName>
     cd <repositoryName>
 ```
-### Step2: Manual Install Dependencies
+### Step2: Install Dependencies
+It is recommended to use a requirements.txt file:
+```
+  pip install -r requirement.txt
+```
+### If installing Manually
 ```
     pip install robotframework
     pip install robotframework-seleniumlibrary
@@ -52,25 +78,20 @@ Before setting up the framework, ensure you have:
 - Enable 2-Step Verification
 - Generate App Password
 - Copy the 16-character password
-
-### Step4: Environment Configuration
-This framework supports multiple environments
-ENVIRONMENTS:
-  PROD:
-    BASE_URL: "https://www.tagesspiegel.de/"
-  STAGING:
-    BASE_URL: "https://staging.tagesspiegel.de/"
-  TEST1:
-    BASE_URL: "https://test1.tagesspiegel.de/"
-
-### Email Configuration 
-- RPA.Email.ImapSmtp
+Note: Do not use the normal gmail password
 
 ## How to Run Tests
 ```
-    robot -v ENV:<ENVIRONMENT> -v GMAIL_USER:<GMAIL_USERNAME> -v   GMAIL_APP_PASSWORD:<GMAIL_APP_PASSWORD> e2e_registration_Test.robot
-```
+  robot -v ENV:PROD \
+      -v GMAIL_USER:your_email@gmail.com \
+      -v GMAIL_APP_PASSWORD:your_app_password \
+      tests/e2e_registration_Test.robot
 
+```
+## Run all tests
+```
+  robot tests/
+```
 ## Test Scenario Covered
 1. Open tagesspiegel.de -> Navigates to the tagesspiegel.de website based on the environment (prod/staging/test1)
 2. Click ‘Anmelden’ link -> Click on Anmelden link on header to register
@@ -85,8 +106,8 @@ ENVIRONMENTS:
 
 ## Test Results
 After test execution, results are automatically generated in the project directory
-
-### Generated File
-- report.html -> High-level test summary with pass/fail statistics and charts
+- report.html -> High-level test summary with pass/fail statistics
 - log.html -> Detailed execution log with timestamps, screenshots and debug info
 - output.xml -> Machine-readable results
+
+

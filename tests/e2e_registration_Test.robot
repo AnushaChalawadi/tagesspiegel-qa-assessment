@@ -4,7 +4,7 @@ Library         String
 Library         DateTime
 Resource        ../pages/BasePage.robot
 Resource        ../pages/HomePage.robot
-Resource        ../resources/Email.robot
+Resource        ../resources/Email_helper.robot
 Resource        ../pages/NewPasswordPage.robot
 Resource        ../pages/LoginModalPage.robot
 
@@ -33,7 +33,7 @@ TC01 Verify that the user can navigate to the registration page
     ${randon_email}=    Set Variable    ${email_prefix}+${timestamp}@gmail.com
 
     # Step1: Click on "Anmelden" button
-    Click Anmelden
+    Click Anmelden Link
     #Title Should Be    Anmelden - Der Tagesspiegel
 
     Switch To Registration Tab

@@ -18,7 +18,6 @@ Verify Password Set Page Is Open
 
 Fill New Password Form
     [Documentation]    This keyword fills the new password form with a generated password and confirms it.
-   # [Arguments]    ${new_password}
 
     #Password (min. 8 characters; for a strong password 
     # we also recommend at least one uppercase letter, 

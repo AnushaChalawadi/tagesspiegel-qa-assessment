@@ -1,42 +1,111 @@
 *** Settings ***
 Library    RPA.Email.ImapSmtp
-#Library    SeleniumLibrary
 Library    String
 Library    Collections
 
 
 *** Variables ***
-${GMAIL_USER}        Johntestemail1792@gmail.com
-${GMAIL_PASSWORD}    cltkbtztbzkqmugq
 ${IMAP_SERVER}       imap.gmail.com
+${iMAP_PORT}         993
 
 
 *** Keywords ***
 Get Registration Link From Email
-    [Arguments]    ${recipient_email}
-    Authorize Imap
-    ...       account=${GMAIL_USER}    
-    ...       password=${GMAIL_PASSWORD}      
-    ...       imap_server=${IMAP_SERVER} 
+    [Documentation]    This keyword retrieves the registration link from the 
+    ...    latest email sent to the specified recipient.
 
-    ${registration_link}=    Wait Until Keyword Succeeds    1 min    5 sec    Get Registration Link From Latest Email    ${recipient_email}
+    [Arguments]    ${recipient_email}    ${gmail_user}    ${gmail_password}    
+
+    #Authorize the IMAP Connection
+    Authorize Imap
+    ...    account=${gmail_user}    
+    ...    password=${gmail_password}      
+    ...    imap_server=${IMAP_SERVER}
+    ...    imap_port=${iMAP_PORT}
+
+    Select Mailbox    INBOX
+                
+    ${registration_link}=   Wait For Registration Email    ${recipient_email}
+
+    Close Mailbox
     RETURN    ${registration_link}
 
-Extract Registration Link From Email Body
+# This keyword will be retried until it succeeds or the timeout is reached
+Wait For Registration Email
+    [Documentation]    This keyword waits for the registration email to arrive in the inbox.
+
+    [Arguments]    ${recipient_email}
+    ${link}=    Wait Until Keyword Succeeds
+    ...    2 min    
+    ...    10 s    
+    ...    Get Registration Link From Latest Email    ${recipient_email}
+
+    RETURN    ${link}
+
+
+
+#     ${messages}=    List Messages
+# ...    criterion=UNSEEN SUBJECT "Tagesspiegel"
+
+#     Should Not Be Empty    ${message}    No emails found for recipient: ${recipient_email}
+
+Get Registration Link Once
+    [Documentation]    This keyword retrieves the registration link 
+    ...    from the latest email sent to the specified recipient without waiting.
     [Arguments]    ${recipient_email}
 
-    ${message}=    List Messages    
-    ...    criteria=TO "${recipient_email}"
-    Should Not Be Empty    ${message}    No emails found for recipient: ${recipient_email}
+    ${messages}=    List Messages
+    ...    criterion=UNSEEN SUBJECT "Tagesspiegel"
 
-    ${latest}=     Get From List    ${message}    -1
+    Should Not Be Empty    ${messages}    No emails found for recipient: ${recipient_email}
+
+    ${latest}=     Get From List    ${messages}    -1
     ${body}=       Set Variable    ${latest}[Body]
 
-    ${links}=      Get Regexp Matches    ${body}    https?://[^\s]+    
+    ${link}=      Extract Registration Link From Email Body    ${body}
 
-    Should Not Be Empty    ${links}    No links found in the email body for recipient: ${recipient_email}
+    RETURN    ${link}
+        
 
-    RETURN   ${links}[0]    Registration link found: ${links}[0]
+Extract Registration Link From Email Body
+    [Documentation]    This keyword extracts the registration link from the body of the latest email 
+    ...    sent to the specified recipient.
+
+    [Arguments]    ${body}
+    ${links}=      Get Regexp Matches    ${body}    https?://[^\\s"'<>]+
+    FOR    ${link}    IN    @{links}
+        ${is_registration_link}=    Run Keyword And Return Status
+        ...    Should Match    ${link}    .*(registration|set-password).*
+        IF    'registration' in ${link} or 'set-password' in ${link}
+            Log    Registration link found: ${link}
+            RETURN    ${link}
+        END
+    END
+    ${length}=    Get Length    ${links}
+    IF    ${length} > 0
+        Log    No registration link found, but links were present. Returning the first link: ${links}[0]
+        RETURN    ${links}[0]
+    ELSE
+        Fail    No links found in the email body for recipient: ${recipient_email}
+    END
+
+
+
+
+    # [Arguments]    ${body}
+
+    # ${message}=    List Messages    
+    # ...    criteria=TO "${recipient_email}"
+    # Should Not Be Empty    ${message}    No emails found for recipient: ${recipient_email}
+
+    # ${latest}=     Get From List    ${message}    -1
+    # ${body}=       Set Variable    ${latest}[Body]
+
+    # ${links}=      Get Regexp Matches    ${body}    https?://[^\s]+    
+
+    # Should Not Be Empty    ${links}    No links found in the email body for recipient: ${recipient_email}
+
+    # RETURN   ${links}[0]    Registration link found: ${links}[0]
 
     # FOR    ${i}     IN RANGE    10
     #     ${emails}=    List Messages    SUBJECT=

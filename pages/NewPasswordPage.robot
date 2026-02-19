@@ -16,8 +16,8 @@ Verify Password Set Page Is Open
 Fill New Password Form
     [Documentation]    This keyword fills the new password form with a generated password and confirms it
 
-    #Password (min. 8 characters; for a strong password 
-    # we also recommend at least one uppercase letter, 
+    # Password (min. 8 characters; for a strong password 
+    # at least one uppercase letter, 
     # one lowercase letter and special characters)
 
     # Generate a password 

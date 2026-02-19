@@ -1,7 +1,7 @@
 *** Settings ***
 Library     SeleniumLibrary
 Library     String
-Variables   ../variables/common_variables.robot 
+Variables   ../variables/common_variables.yaml
 
 *** Variables ***
 ${ANMELDEN_LINK}       xpath=//a[@data-gtm-link-text='Anmelden']

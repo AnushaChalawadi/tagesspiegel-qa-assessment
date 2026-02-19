@@ -1,0 +1,1670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.13.5 on win32)" generated="2026-02-19T12:49:47.471663" rpa="false" schemaversion="5">
+<suite id="s1" name="e2e registration Test" source="C:\Users\PC\Documents\tagesspiegel\assessment-task-tagesspiegel\tests\e2e_registration_Test.robot">
+<kw name="Open Tagesspiegel Application" owner="BasePage" type="SETUP">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-19T12:49:47.914182" level="INFO">${BASE_URL} = https://www.tagesspiegel.de/</msg>
+<var>${BASE_URL}</var>
+<arg>${environments}[${ENV}][base_url]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-19T12:49:47.913679" elapsed="0.000555"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Running tests on ${ENV} environment</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-19T12:49:47.914456" elapsed="0.000547"/>
+</kw>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:49:47.915617" level="INFO">Opening browser 'chrome' to base url 'https://www.tagesspiegel.de/'.</msg>
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-02-19T12:49:47.915313" elapsed="5.253294"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.168987" elapsed="0.130337"/>
+</kw>
+<kw name="Accept Cookies If Present" owner="HomePage">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:49:53.377674" level="INFO">Element 'xpath=//iframe[contains(@id,'sp_message_iframe')]' is displayed.</msg>
+<arg>${COOKIE_IFRAME}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.302261" elapsed="0.075623"/>
+</kw>
+<msg time="2026-02-19T12:49:53.378195" level="INFO">${iframe_exists} = True</msg>
+<var>${iframe_exists}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${COOKIE_IFRAME}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.301090" elapsed="0.077207"/>
+</kw>
+<if>
+<branch type="IF" condition="${iframe_exists}">
+<kw name="Select Frame" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:49:53.380623" level="INFO">Selecting frame 'xpath=//iframe[contains(@id,'sp_message_iframe')]'.</msg>
+<arg>${COOKIE_IFRAME}</arg>
+<doc>Sets frame identified by ``locator`` as the current frame.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.379436" elapsed="0.062577"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${ACCEPT_BUTTON}</arg>
+<arg>${WAIT_TIME_10SEC}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.442522" elapsed="0.063573"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:49:53.506865" level="INFO">Clicking element 'xpath=//button[contains(.,'Alle akzeptieren')]'.</msg>
+<arg>${ACCEPT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.506462" elapsed="0.312739"/>
+</kw>
+<kw name="Unselect Frame" owner="SeleniumLibrary">
+<doc>Sets the main frame as the current frame.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.819625" elapsed="0.007784"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" owner="SeleniumLibrary">
+<arg>${COOKIE_IFRAME}</arg>
+<arg>${WAIT_TIME_10SEC}</arg>
+<doc>Waits until the element ``locator`` disappears from the current page.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.827931" elapsed="0.015712"/>
+</kw>
+<status status="PASS" start="2026-02-19T12:49:53.378675" elapsed="0.465235"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:49:53.378545" elapsed="0.465522"/>
+</if>
+<doc>Accepts cookies if the cookie banner is present on the page</doc>
+<status status="PASS" start="2026-02-19T12:49:53.300095" elapsed="0.544163"/>
+</kw>
+<doc>This keyword opens the Tagesspiegel application in a web browser
+and maximizes the window. It also accepts cookies if the banner is present</doc>
+<status status="PASS" start="2026-02-19T12:49:47.912865" elapsed="5.931582"/>
+</kw>
+<test id="s1-t1" name="TC01 Verify that the user can navigate to the registration page" line="20">
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2026-02-19T12:49:53.847429" level="INFO">${timestamp} = 20260219124953</msg>
+<var>${timestamp}</var>
+<arg>result_format=%Y%m%d%H%M%S</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.846835" elapsed="0.000674"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-02-19T12:49:53.849763" level="INFO">${email_prefix} = arjun.dandagi</msg>
+<var>${email_prefix}</var>
+<arg>'${GMAIL_USER}'.split('@')[0]</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.848412" elapsed="0.001442"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-19T12:49:53.851395" level="INFO">${randon_email} = arjun.dandagi+20260219124953@gmail.com</msg>
+<var>${randon_email}</var>
+<arg>${email_prefix}+${timestamp}@gmail.com</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.850474" elapsed="0.001020"/>
+</kw>
+<kw name="Click Anmelden Modal" owner="HomePage">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${ANMELDEN_LINK}</arg>
+<arg>${WAIT_TIME_10SEC}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.852942" elapsed="0.060551"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:49:53.914094" level="INFO">Clicking element 'xpath=//a[@data-gtm-link-text='Anmelden']'.</msg>
+<arg>${ANMELDEN_LINK}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.913782" elapsed="0.233398"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${MODAL_IFRAME}</arg>
+<arg>${WAIT_TIME_10SEC}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-19T12:49:54.147945" elapsed="3.451669"/>
+</kw>
+<doc>Click on the Anmelden link and wait for the login modal to appear</doc>
+<status status="PASS" start="2026-02-19T12:49:53.852102" elapsed="3.747675"/>
+</kw>
+<kw name="Switch To Registration Tab" owner="LoginModalPage">
+<kw name="Switch To Login Iframe" owner="LoginModalPage">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${MODAL_IFRAME}</arg>
+<arg>${WAIT_TIME_20SEC}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-19T12:49:57.601192" elapsed="0.030598"/>
+</kw>
+<kw name="Select Frame" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:49:57.632757" level="INFO">Selecting frame 'id=modal-iframe'.</msg>
+<arg>${MODAL_IFRAME}</arg>
+<doc>Sets frame identified by ``locator`` as the current frame.</doc>
+<status status="PASS" start="2026-02-19T12:49:57.632293" elapsed="0.058360"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${REGISTER_TAB}</arg>
+<arg>${WAIT_TIME_20SEC}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-19T12:49:57.691121" elapsed="0.292012"/>
+</kw>
+<doc>This keyword switches to the login modal iframe
+and waits for the registration tab to be visible.</doc>
+<status status="PASS" start="2026-02-19T12:49:57.600830" elapsed="0.382492"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${REGISTER_TAB}</arg>
+<arg>${WAIT_TIME_20SEC}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-19T12:49:57.983623" elapsed="0.065413"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:49:58.050273" level="INFO">Clicking element 'xpath=//button[@id='tab-register']'.</msg>
+<arg>${REGISTER_TAB}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-19T12:49:58.049723" elapsed="0.311122"/>
+</kw>
+<doc>This keyword clicks on the "Registrieren" tab to switch to the registration form.</doc>
+<status status="PASS" start="2026-02-19T12:49:57.600360" elapsed="0.760794"/>
+</kw>
+<kw name="Fill Registration Form" owner="LoginModalPage">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${EMAIL_FIELD}</arg>
+<arg>${WAIT_TIME_20SEC}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-19T12:49:58.362477" elapsed="0.354972"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:49:58.718470" level="INFO">Typing text 'arjun.dandagi+20260219124953@gmail.com' into text field 'xpath=//input[@id="forms/formRegistration_email"]'.</msg>
+<arg>${EMAIL_FIELD}</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-19T12:49:58.717881" elapsed="0.865075"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:49:59.584162" level="INFO">Typing text 'John' into text field 'xpath=//input[@id="forms/formRegistration_forename"]'.</msg>
+<arg>${FIRST_NAME_FIELD}</arg>
+<arg>${first_name}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-19T12:49:59.583420" elapsed="0.555533"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:00.140279" level="INFO">Typing text 'Doew' into text field 'xpath=//input[@id="forms/formRegistration_surname"]'.</msg>
+<arg>${SURNAME_FIELD}</arg>
+<arg>${last_name}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-19T12:50:00.139507" elapsed="0.343187"/>
+</kw>
+<arg>${randon_email}</arg>
+<arg>John</arg>
+<arg>Doew</arg>
+<doc>This keyword fills the registration form with email, first name and surname.</doc>
+<status status="PASS" start="2026-02-19T12:49:58.361833" elapsed="2.121044"/>
+</kw>
+<kw name="Submit Registration Form" owner="LoginModalPage">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${REGISTER_BUTTON}</arg>
+<arg>${WAIT_TIME_20SEC}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-19T12:50:00.484663" elapsed="0.062071"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:00.834563" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="before_submit.png"&gt;&lt;img src="before_submit.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>before_submit.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-02-19T12:50:00.547149" elapsed="0.287644"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:00.835795" level="INFO">Clicking element 'xpath=//button[.//span[normalize-space()='Jetzt registrieren']]'.</msg>
+<arg>${REGISTER_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-19T12:50:00.835235" elapsed="2.575184"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:03.855979" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="after_submit.png"&gt;&lt;img src="after_submit.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>after_submit.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-02-19T12:50:03.411348" elapsed="0.444879"/>
+</kw>
+<doc>This keyword clicks on the "Jetzt registrieren" button to submit the registration form.</doc>
+<status status="PASS" start="2026-02-19T12:50:00.483756" elapsed="3.372763"/>
+</kw>
+<kw name="Get Registration Link From Email" owner="Email_helper">
+<kw name="Authorize Imap" owner="RPA.Email.ImapSmtp">
+<arg>account=${gmail_user}</arg>
+<arg>password=${gmail_app_password}</arg>
+<arg>imap_server=${IMAP_SERVER}</arg>
+<arg>imap_port=${IMAP_PORT}</arg>
+<doc>Authorize to IMAP server.</doc>
+<status status="PASS" start="2026-02-19T12:50:03.858789" elapsed="0.476240"/>
+</kw>
+<kw name="Wait For Registration Email" owner="Email_helper">
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Get Registration Link Once" owner="Email_helper">
+<kw name="List Messages" owner="RPA.Email.ImapSmtp">
+<msg time="2026-02-19T12:50:04.423723" level="INFO">IMAP search: 'UNSEEN SUBJECT "tagesspiegel"'</msg>
+<msg time="2026-02-19T12:50:04.859458" level="INFO">${messages} = [{'Mail-Id': '120', 'Message': &lt;email.message.Message object at 0x000002815ABCF390&gt;, 'Body': '&lt;!DOCTYPE html&gt;\r\n&lt;html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com...</msg>
+<var>${messages}</var>
+<arg>criterion=UNSEEN SUBJECT "tagesspiegel"</arg>
+<doc>Return list of messages matching criterion.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.390712" elapsed="0.468904"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.862563" level="INFO">Length is 1.</msg>
+<arg>${messages}</arg>
+<arg>No emails found for recipient: ${recipient_email}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.860058" elapsed="0.002719"/>
+</kw>
+<kw name="Get From List" owner="Collections">
+<msg time="2026-02-19T12:50:04.864749" level="INFO">${latest} = {'Mail-Id': '120', 'Message': &lt;email.message.Message object at 0x000002815ABCF390&gt;, 'Body': '&lt;!DOCTYPE html&gt;\r\n&lt;html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:...</msg>
+<var>${latest}</var>
+<arg>${messages}</arg>
+<arg>-1</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.863366" elapsed="0.001476"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.865953" level="INFO">${body} = &lt;!DOCTYPE html&gt;
+&lt;html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt; &lt;!-...</msg>
+<var>${body}</var>
+<arg>${latest}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.865155" elapsed="0.000922"/>
+</kw>
+<kw name="Extract Registration Link From Email Body" owner="Email_helper">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2026-02-19T12:50:04.868898" level="INFO">${links} = ['http://www.w3.org/1999/xhtml', 'http://stylecampaign.com/blog/2015/02/webfont-support-in-email/', 'https://fonts.googleapis.com/css?family=Roboto:400,700', 'https://handelsblatt-gmbh.atlassian.net/w...</msg>
+<var>${links}</var>
+<arg>${body}</arg>
+<arg>https?://[^\\s"'&lt;&gt;]+</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.867772" elapsed="0.001268"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.876689" level="FAIL">'http://www.w3.org/1999/xhtml' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.874750" elapsed="0.002387">'http://www.w3.org/1999/xhtml' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.877774" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.872156" elapsed="0.005930"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.878869" elapsed="0.000080"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.879118" elapsed="0.000068"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.878433" elapsed="0.000845"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.878373" elapsed="0.001004"/>
+</if>
+<var name="${link}">http://www.w3.org/1999/xhtml</var>
+<status status="PASS" start="2026-02-19T12:50:04.871068" elapsed="0.008402"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.882505" level="FAIL">'http://stylecampaign.com/blog/2015/02/webfont-support-in-email/' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.881541" elapsed="0.001186">'http://stylecampaign.com/blog/2015/02/webfont-support-in-email/' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.883151" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.880541" elapsed="0.002736"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.884438" elapsed="0.000112"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.884725" elapsed="0.000092"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.883607" elapsed="0.001344"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.883541" elapsed="0.001528"/>
+</if>
+<var name="${link}">http://stylecampaign.com/blog/2015/02/webfont-support-in-email/</var>
+<status status="PASS" start="2026-02-19T12:50:04.880199" elapsed="0.004954"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.887399" level="FAIL">'https://fonts.googleapis.com/css?family=Roboto:400,700' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.886763" elapsed="0.000761">'https://fonts.googleapis.com/css?family=Roboto:400,700' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.887745" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.886096" elapsed="0.001706"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.888219" elapsed="0.000049"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.888384" elapsed="0.000055"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.887960" elapsed="0.000543"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.887921" elapsed="0.000638"/>
+</if>
+<var name="${link}">https://fonts.googleapis.com/css?family=Roboto:400,700</var>
+<status status="PASS" start="2026-02-19T12:50:04.885625" elapsed="0.002972"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.893097" level="FAIL">'https://handelsblatt-gmbh.atlassian.net/wiki/spaces/CUE/pages/2952069143/Tagesspiegel+Fonts' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.891957" elapsed="0.001701">'https://handelsblatt-gmbh.atlassian.net/wiki/spaces/CUE/pages/2952069143/Tagesspiegel+Fonts' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.894013" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.889056" elapsed="0.005041"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.894805" elapsed="0.000077"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.895206" elapsed="0.000107"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.894375" elapsed="0.001177"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.894313" elapsed="0.001378"/>
+</if>
+<var name="${link}">https://handelsblatt-gmbh.atlassian.net/wiki/spaces/CUE/pages/2952069143/Tagesspiegel+Fonts</var>
+<status status="PASS" start="2026-02-19T12:50:04.888835" elapsed="0.006941"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.898678" level="FAIL">'https://assets.tagesspiegel.de/fonts/franklingothic-book-basic.c62561d04e5eb023ca3e2fde512605c0.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.897725" elapsed="0.001155">'https://assets.tagesspiegel.de/fonts/franklingothic-book-basic.c62561d04e5eb023ca3e2fde512605c0.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.899210" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.896809" elapsed="0.002492"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.900019" elapsed="0.000081"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.900422" elapsed="0.000082"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.899583" elapsed="0.001050"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.899522" elapsed="0.001224"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/franklingothic-book-basic.c62561d04e5eb023ca3e2fde512605c0.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.896438" elapsed="0.004387"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.903276" level="FAIL">'https://assets.tagesspiegel.de/fonts/franklingothic-book-extended.b0f1fe099d20b0de899ed94f6292ba63.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.902424" elapsed="0.001008">'https://assets.tagesspiegel.de/fonts/franklingothic-book-extended.b0f1fe099d20b0de899ed94f6292ba63.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.903667" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.901576" elapsed="0.002144"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.904249" elapsed="0.000054"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.904583" elapsed="0.000082"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.903904" elapsed="0.000875"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.903865" elapsed="0.001016"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/franklingothic-book-extended.b0f1fe099d20b0de899ed94f6292ba63.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.901262" elapsed="0.003690"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.907290" level="FAIL">'https://assets.tagesspiegel.de/fonts/franklingothic-book-other.6c8ff800d4fec0ff804a756fc400d2b5.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.906490" elapsed="0.000979">'https://assets.tagesspiegel.de/fonts/franklingothic-book-other.6c8ff800d4fec0ff804a756fc400d2b5.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.907878" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.905657" elapsed="0.002293"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.908852" elapsed="0.000095"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.909134" elapsed="0.000082"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.908193" elapsed="0.001374"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.908128" elapsed="0.001586"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/franklingothic-book-other.6c8ff800d4fec0ff804a756fc400d2b5.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.905350" elapsed="0.004569"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.912914" level="FAIL">'https://assets.tagesspiegel.de/fonts/franklingothic-med-basic.4262342c15da29dbdffaff795d31ad13.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.912155" elapsed="0.000890">'https://assets.tagesspiegel.de/fonts/franklingothic-med-basic.4262342c15da29dbdffaff795d31ad13.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.913241" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.910864" elapsed="0.002422"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.913729" elapsed="0.000049"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.913862" elapsed="0.000098"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.913471" elapsed="0.000648"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.913428" elapsed="0.000770"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/franklingothic-med-basic.4262342c15da29dbdffaff795d31ad13.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.910545" elapsed="0.003698"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.915944" level="FAIL">'https://assets.tagesspiegel.de/fonts/franklingothic-med-extended.e84bf4c79c0055f692e535db121cff4a.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.915360" elapsed="0.000725">'https://assets.tagesspiegel.de/fonts/franklingothic-med-extended.e84bf4c79c0055f692e535db121cff4a.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.916272" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.914781" elapsed="0.001536"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.916774" elapsed="0.000050"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.916910" elapsed="0.000040"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.916461" elapsed="0.000550"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.916427" elapsed="0.000638"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/franklingothic-med-extended.e84bf4c79c0055f692e535db121cff4a.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.914514" elapsed="0.002785"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.918904" level="FAIL">'https://assets.tagesspiegel.de/fonts/franklingothic-med-other.cf0c8764bdcabb0619e46b20c18d5147.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.918332" elapsed="0.000690">'https://assets.tagesspiegel.de/fonts/franklingothic-med-other.cf0c8764bdcabb0619e46b20c18d5147.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.919521" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.917791" elapsed="0.001827"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.920427" elapsed="0.000096"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.920679" elapsed="0.000099"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.919969" elapsed="0.000938"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.919907" elapsed="0.001105"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/franklingothic-med-other.cf0c8764bdcabb0619e46b20c18d5147.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.917567" elapsed="0.003532"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.923406" level="FAIL">'https://assets.tagesspiegel.de/fonts/franklingothic-bookit-basic.704694515c674340e94c2ed839b556d0.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.922551" elapsed="0.001053">'https://assets.tagesspiegel.de/fonts/franklingothic-bookit-basic.704694515c674340e94c2ed839b556d0.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.923933" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.921870" elapsed="0.002148"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.924711" elapsed="0.000113"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.924980" elapsed="0.000070"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.924280" elapsed="0.000883"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.924223" elapsed="0.001044"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/franklingothic-bookit-basic.704694515c674340e94c2ed839b556d0.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.921538" elapsed="0.003805"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.927837" level="FAIL">'https://assets.tagesspiegel.de/fonts/franklingothic-bookit-extended.8d37e7ba346ee9bdd46ceb66649eeb6f.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.926930" elapsed="0.001135">'https://assets.tagesspiegel.de/fonts/franklingothic-bookit-extended.8d37e7ba346ee9bdd46ceb66649eeb6f.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.928372" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.926042" elapsed="0.002389"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.929006" elapsed="0.000053"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.929188" elapsed="0.000053"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.928678" elapsed="0.000630"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.928625" elapsed="0.000743"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/franklingothic-bookit-extended.8d37e7ba346ee9bdd46ceb66649eeb6f.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.925739" elapsed="0.003669"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.931657" level="FAIL">'https://assets.tagesspiegel.de/fonts/franklingothic-bookit-other.63348d74b73cbe3e9f4b9b81f2f21f2e.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.930853" elapsed="0.001067">'https://assets.tagesspiegel.de/fonts/franklingothic-bookit-other.63348d74b73cbe3e9f4b9b81f2f21f2e.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.932264" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.929944" elapsed="0.002429"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.933155" elapsed="0.000092"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.933412" elapsed="0.000076"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.932664" elapsed="0.000910"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.932606" elapsed="0.001031"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/franklingothic-bookit-other.63348d74b73cbe3e9f4b9b81f2f21f2e.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.929662" elapsed="0.004072"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.936626" level="FAIL">'https://assets.tagesspiegel.de/fonts/franklingothic-medit-basic.8d434a4bf415ab849c4fb2d487c78d9e.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.935739" elapsed="0.001107">'https://assets.tagesspiegel.de/fonts/franklingothic-medit-basic.8d434a4bf415ab849c4fb2d487c78d9e.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.937289" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.934640" elapsed="0.002750"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.938545" elapsed="0.000084"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.938749" elapsed="0.000052"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.937925" elapsed="0.000984"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.937822" elapsed="0.001178"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/franklingothic-medit-basic.8d434a4bf415ab849c4fb2d487c78d9e.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.934292" elapsed="0.004764"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.941876" level="FAIL">'https://assets.tagesspiegel.de/fonts/franklingothic-medit-extended.aa7f600d761ddf13a12fd16126578493.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.941083" elapsed="0.000926">'https://assets.tagesspiegel.de/fonts/franklingothic-medit-extended.aa7f600d761ddf13a12fd16126578493.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.942245" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.939952" elapsed="0.002345"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.942695" elapsed="0.000060"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.942888" elapsed="0.000048"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.942450" elapsed="0.000548"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.942414" elapsed="0.000641"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/franklingothic-medit-extended.aa7f600d761ddf13a12fd16126578493.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.939389" elapsed="0.003704"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.945145" level="FAIL">'https://assets.tagesspiegel.de/fonts/franklingothic-medit-other.ecc26a3f1e51610680769e0acd49cddb.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.944356" elapsed="0.000966">'https://assets.tagesspiegel.de/fonts/franklingothic-medit-other.ecc26a3f1e51610680769e0acd49cddb.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.945667" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.943535" elapsed="0.002211"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.946411" elapsed="0.000082"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.946646" elapsed="0.000069"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.945999" elapsed="0.000824"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.945948" elapsed="0.000974"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/franklingothic-medit-other.ecc26a3f1e51610680769e0acd49cddb.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.943322" elapsed="0.003668"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.949438" level="FAIL">'https://assets.tagesspiegel.de/fonts/Abril_Text_Regular-basic.c371b6fb87298eb4990a97124a47e7e4.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.948477" elapsed="0.001162">'https://assets.tagesspiegel.de/fonts/Abril_Text_Regular-basic.c371b6fb87298eb4990a97124a47e7e4.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.949989" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.947684" elapsed="0.002399"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.950837" elapsed="0.000095"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.951093" elapsed="0.000080"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.950353" elapsed="0.000958"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.950294" elapsed="0.001186"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/Abril_Text_Regular-basic.c371b6fb87298eb4990a97124a47e7e4.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.947364" elapsed="0.004204"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.954027" level="FAIL">'https://assets.tagesspiegel.de/fonts/Abril_Text_Regular-extended.413ee6f014cfa7c05f2979ccb6498cee.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.953041" elapsed="0.001322">'https://assets.tagesspiegel.de/fonts/Abril_Text_Regular-extended.413ee6f014cfa7c05f2979ccb6498cee.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.954979" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.952372" elapsed="0.002694"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.956511" elapsed="0.000137"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.956855" elapsed="0.000087"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.955500" elapsed="0.001583"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.955423" elapsed="0.001849"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/Abril_Text_Regular-extended.413ee6f014cfa7c05f2979ccb6498cee.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.952002" elapsed="0.005386"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.963418" level="FAIL">'https://assets.tagesspiegel.de/fonts/Abril_Text_Regular-other.61f64d4bd1292c6d4197f0e2b25dbd5c.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.961801" elapsed="0.001789">'https://assets.tagesspiegel.de/fonts/Abril_Text_Regular-other.61f64d4bd1292c6d4197f0e2b25dbd5c.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.963843" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.959563" elapsed="0.004336"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.964993" elapsed="0.000158"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.965444" elapsed="0.000096"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.964445" elapsed="0.001228"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.964373" elapsed="0.001420"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/Abril_Text_Regular-other.61f64d4bd1292c6d4197f0e2b25dbd5c.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.958981" elapsed="0.006888"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.975113" level="FAIL">'https://assets.tagesspiegel.de/fonts/Abril_Text_Italic-basic.6c5932e5019579d6c76d1822e5aacc4d.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.974307" elapsed="0.001019">'https://assets.tagesspiegel.de/fonts/Abril_Text_Italic-basic.6c5932e5019579d6c76d1822e5aacc4d.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.975661" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.973471" elapsed="0.002266"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.976400" elapsed="0.000081"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.976630" elapsed="0.000069"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.975988" elapsed="0.000826"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.975935" elapsed="0.000984"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/Abril_Text_Italic-basic.6c5932e5019579d6c76d1822e5aacc4d.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.973090" elapsed="0.003902"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.979481" level="FAIL">'https://assets.tagesspiegel.de/fonts/Abril_Text_Italic-extended.78a8e02738052517cef32ad41e080698.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.978471" elapsed="0.001160">'https://assets.tagesspiegel.de/fonts/Abril_Text_Italic-extended.78a8e02738052517cef32ad41e080698.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.979926" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.977704" elapsed="0.002273"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.980735" elapsed="0.000097"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.981016" elapsed="0.000077"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.980180" elapsed="0.001034"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.980124" elapsed="0.001205"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/Abril_Text_Italic-extended.78a8e02738052517cef32ad41e080698.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.977401" elapsed="0.004005"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.983853" level="FAIL">'https://assets.tagesspiegel.de/fonts/Abril_Text_Italic-other.6550b277e9b9798aaca8c9bd4a29370d.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.983073" elapsed="0.001006">'https://assets.tagesspiegel.de/fonts/Abril_Text_Italic-other.6550b277e9b9798aaca8c9bd4a29370d.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.984484" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.982224" elapsed="0.002362"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.985130" elapsed="0.000053"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.985270" elapsed="0.000069"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.984858" elapsed="0.000691"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.984813" elapsed="0.000827"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/Abril_Text_Italic-other.6550b277e9b9798aaca8c9bd4a29370d.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.981831" elapsed="0.003863"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.988129" level="FAIL">'https://assets.tagesspiegel.de/fonts/Abril_Text_Bold-basic.ed72f8ea0597f63d7cc1a47ae7bb3acd.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.987283" elapsed="0.001019">'https://assets.tagesspiegel.de/fonts/Abril_Text_Bold-basic.ed72f8ea0597f63d7cc1a47ae7bb3acd.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.988790" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.986507" elapsed="0.002378"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.989703" elapsed="0.000089"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.989956" elapsed="0.000074"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.989125" elapsed="0.001023"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.989078" elapsed="0.001179"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/Abril_Text_Bold-basic.ed72f8ea0597f63d7cc1a47ae7bb3acd.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.986192" elapsed="0.004144"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.992725" level="FAIL">'https://assets.tagesspiegel.de/fonts/Abril_Text_Bold-extended.7e1a83a609780222181670109982a7a2.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.991945" elapsed="0.000920">'https://assets.tagesspiegel.de/fonts/Abril_Text_Bold-extended.7e1a83a609780222181670109982a7a2.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.993137" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.991149" elapsed="0.002045"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.993730" elapsed="0.000066"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.994009" elapsed="0.000088"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.993389" elapsed="0.000850"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.993346" elapsed="0.001327"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/Abril_Text_Bold-extended.7e1a83a609780222181670109982a7a2.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.990794" elapsed="0.003966"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:04.996793" level="FAIL">'https://assets.tagesspiegel.de/fonts/Abril_Text_Bold-other.63f970ecd2e74982468d1d71a0d57603.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.996064" elapsed="0.000895">'https://assets.tagesspiegel.de/fonts/Abril_Text_Bold-other.63f970ecd2e74982468d1d71a0d57603.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:04.997251" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.995413" elapsed="0.001908"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:04.997951" elapsed="0.000077"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:04.998151" elapsed="0.000082"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:04.997556" elapsed="0.000754"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:04.997506" elapsed="0.000865"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/Abril_Text_Bold-other.63f970ecd2e74982468d1d71a0d57603.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.995171" elapsed="0.003264"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:05.000714" level="FAIL">'https://assets.tagesspiegel.de/fonts/Abril_Text_BoldItalic-basic.1cd71e407d313b5db30f65b5a9bc639f.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:04.999889" elapsed="0.000995">'https://assets.tagesspiegel.de/fonts/Abril_Text_BoldItalic-basic.1cd71e407d313b5db30f65b5a9bc639f.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:05.001188" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.999027" elapsed="0.002232"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:05.002082" elapsed="0.000079"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:05.002306" elapsed="0.000067"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:05.001616" elapsed="0.000866"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:05.001561" elapsed="0.001023"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/Abril_Text_BoldItalic-basic.1cd71e407d313b5db30f65b5a9bc639f.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:04.998835" elapsed="0.003820"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:05.004827" level="FAIL">'https://assets.tagesspiegel.de/fonts/Abril_Text_BoldItalic-extended.b170c650a27d0d4e8388a0d71fedf766.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:05.004058" elapsed="0.000932">'https://assets.tagesspiegel.de/fonts/Abril_Text_BoldItalic-extended.b170c650a27d0d4e8388a0d71fedf766.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:05.005281" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:05.003307" elapsed="0.002048"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:05.006060" elapsed="0.000083"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:05.006287" elapsed="0.000063"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:05.005602" elapsed="0.000860"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:05.005552" elapsed="0.001012"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/Abril_Text_BoldItalic-extended.b170c650a27d0d4e8388a0d71fedf766.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:05.003023" elapsed="0.003616"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:05.008833" level="FAIL">'https://assets.tagesspiegel.de/fonts/Abril_Text_BoldItalic-other.743b66d7be6806c719e244333d62bffd.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:05.008069" elapsed="0.000932">'https://assets.tagesspiegel.de/fonts/Abril_Text_BoldItalic-other.743b66d7be6806c719e244333d62bffd.woff2' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:05.009295" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:05.007292" elapsed="0.002164"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:05.010181" elapsed="0.000080"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:05.010383" elapsed="0.000049"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:05.009761" elapsed="0.000749"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:05.009714" elapsed="0.000886"/>
+</if>
+<var name="${link}">https://assets.tagesspiegel.de/fonts/Abril_Text_BoldItalic-other.743b66d7be6806c719e244333d62bffd.woff2</var>
+<status status="PASS" start="2026-02-19T12:50:05.007008" elapsed="0.003658"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:05.013030" level="FAIL">'https://github.com/TedGoas/Cerberus/issues/89' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:05.012231" elapsed="0.001023">'https://github.com/TedGoas/Cerberus/issues/89' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:05.013585" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:05.011499" elapsed="0.002164"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:05.014379" elapsed="0.000091"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:05.014629" elapsed="0.000070"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:05.013935" elapsed="0.000881"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:05.013878" elapsed="0.001045"/>
+</if>
+<var name="${link}">https://github.com/TedGoas/Cerberus/issues/89</var>
+<status status="PASS" start="2026-02-19T12:50:05.011104" elapsed="0.003897"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:05.017150" level="FAIL">'https://mein.tagesspiegel.de/themes/frontend/tagesspiegel/assets/img/mail/tsp-logo.png' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:05.016523" elapsed="0.000748">'https://mein.tagesspiegel.de/themes/frontend/tagesspiegel/assets/img/mail/tsp-logo.png' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:05.017601" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:05.015739" elapsed="0.001951"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:05.018463" elapsed="0.000095"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:05.018715" elapsed="0.000066"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:05.017983" elapsed="0.000919"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:05.017917" elapsed="0.001225"/>
+</if>
+<var name="${link}">https://mein.tagesspiegel.de/themes/frontend/tagesspiegel/assets/img/mail/tsp-logo.png</var>
+<status status="PASS" start="2026-02-19T12:50:05.015420" elapsed="0.003821"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<msg time="2026-02-19T12:50:05.022135" level="FAIL">'https://mein.tagesspiegel.de/themes/frontend/tagesspiegel/assets/img/mail/tgs-aufmacher.png' does not match '(?i)(registr|confirm|verify|activate|token)'</msg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="FAIL" start="2026-02-19T12:50:05.021163" elapsed="0.001157">'https://mein.tagesspiegel.de/themes/frontend/tagesspiegel/assets/img/mail/tgs-aufmacher.png' does not match '(?i)(registr|confirm|verify|activate|token)'</status>
+</kw>
+<msg time="2026-02-19T12:50:05.022657" level="INFO">${is_registration_link} = False</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:05.020134" elapsed="0.002605"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:05.023475" elapsed="0.000086"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="NOT RUN" start="2026-02-19T12:50:05.023744" elapsed="0.000070"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:05.023018" elapsed="0.000918"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:05.022958" elapsed="0.001092"/>
+</if>
+<var name="${link}">https://mein.tagesspiegel.de/themes/frontend/tagesspiegel/assets/img/mail/tgs-aufmacher.png</var>
+<status status="PASS" start="2026-02-19T12:50:05.019761" elapsed="0.004374"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" start="2026-02-19T12:50:05.025845" elapsed="0.000798"/>
+</kw>
+<msg time="2026-02-19T12:50:05.026955" level="INFO">${is_registration_link} = True</msg>
+<var>${is_registration_link}</var>
+<arg>Should Match Regexp</arg>
+<arg>${link}</arg>
+<arg>(?i)(registr|confirm|verify|activate|token)</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:05.024976" elapsed="0.002060"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_registration_link}">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-02-19T12:50:05.028378" level="INFO">Registration link found: https://mein.tagesspiegel.de/verify-token/d41b2695fabc8b10dec343f736c334faae9cf971?utm_source=optin-email&amp;amp;utm_medium=email&amp;amp;utm_campaign=meintgs-optin</msg>
+<arg>Registration link found: ${link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-02-19T12:50:05.027749" elapsed="0.000771"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="PASS" start="2026-02-19T12:50:05.028690" elapsed="0.000121"/>
+</return>
+<status status="PASS" start="2026-02-19T12:50:05.027317" elapsed="0.001636"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:05.027262" elapsed="0.001818"/>
+</if>
+<var name="${link}">https://mein.tagesspiegel.de/verify-token/d41b2695fabc8b10dec343f736c334faae9cf971?utm_source=optin-email&amp;amp;utm_medium=email&amp;amp;utm_campaign=meintgs-optin</var>
+<status status="PASS" start="2026-02-19T12:50:05.024571" elapsed="0.004685"/>
+</iter>
+<var>${link}</var>
+<value>@{links}</value>
+<status status="PASS" start="2026-02-19T12:50:04.869716" elapsed="0.159766"/>
+</for>
+<kw name="Get Length" owner="BuiltIn">
+<var>${length}</var>
+<arg>${links}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:05.029911" elapsed="0.000091"/>
+</kw>
+<if>
+<branch type="IF" condition="${length} &gt; 0">
+<kw name="Log" owner="BuiltIn">
+<arg>No registration link found, but links were present. Returning the first link: ${links}[0]</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:05.030752" elapsed="0.000104"/>
+</kw>
+<return>
+<value>${links}[0]</value>
+<status status="NOT RUN" start="2026-02-19T12:50:05.031020" elapsed="0.000092"/>
+</return>
+<status status="NOT RUN" start="2026-02-19T12:50:05.030300" elapsed="0.001077"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" owner="BuiltIn">
+<arg>No links found in the email body for recipient: ${recipient_email}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:05.031800" elapsed="0.000075"/>
+</kw>
+<status status="NOT RUN" start="2026-02-19T12:50:05.031490" elapsed="0.000515"/>
+</branch>
+<status status="NOT RUN" start="2026-02-19T12:50:05.030238" elapsed="0.001865"/>
+</if>
+<msg time="2026-02-19T12:50:05.032464" level="INFO">${link} = https://mein.tagesspiegel.de/verify-token/d41b2695fabc8b10dec343f736c334faae9cf971?utm_source=optin-email&amp;amp;utm_medium=email&amp;amp;utm_campaign=meintgs-optin</msg>
+<var>${link}</var>
+<arg>${body}</arg>
+<doc>This keyword extracts the registration link from the body of the latest email
+sent to the specified recipient.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.867026" elapsed="0.165533"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="PASS" start="2026-02-19T12:50:05.032735" elapsed="0.000103"/>
+</return>
+<arg>${recipient_email}</arg>
+<doc>This keyword retrieves the registration link
+from the latest email sent to the specified recipient without waiting</doc>
+<status status="PASS" start="2026-02-19T12:50:04.386506" elapsed="0.646671"/>
+</kw>
+<msg time="2026-02-19T12:50:05.033437" level="INFO">${link} = https://mein.tagesspiegel.de/verify-token/d41b2695fabc8b10dec343f736c334faae9cf971?utm_source=optin-email&amp;amp;utm_medium=email&amp;amp;utm_campaign=meintgs-optin</msg>
+<var>${link}</var>
+<arg>3 min</arg>
+<arg>10 s</arg>
+<arg>Get Registration Link Once</arg>
+<arg>${recipient_email}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2026-02-19T12:50:04.358133" elapsed="0.675388"/>
+</kw>
+<return>
+<value>${link}</value>
+<status status="PASS" start="2026-02-19T12:50:05.033727" elapsed="0.000104"/>
+</return>
+<msg time="2026-02-19T12:50:05.034203" level="INFO">${registration_link} = https://mein.tagesspiegel.de/verify-token/d41b2695fabc8b10dec343f736c334faae9cf971?utm_source=optin-email&amp;amp;utm_medium=email&amp;amp;utm_campaign=meintgs-optin</msg>
+<var>${registration_link}</var>
+<arg>${recipient_email}</arg>
+<doc>This keyword waits for the registration email to arrive in the inbox</doc>
+<status status="PASS" start="2026-02-19T12:50:04.335718" elapsed="0.698570"/>
+</kw>
+<return>
+<value>${registration_link}</value>
+<status status="PASS" start="2026-02-19T12:50:05.034481" elapsed="0.000092"/>
+</return>
+<msg time="2026-02-19T12:50:05.034946" level="INFO">${reg_link} = https://mein.tagesspiegel.de/verify-token/d41b2695fabc8b10dec343f736c334faae9cf971?utm_source=optin-email&amp;amp;utm_medium=email&amp;amp;utm_campaign=meintgs-optin</msg>
+<var>${reg_link}</var>
+<arg>${randon_email}</arg>
+<arg>${GMAIL_USER}</arg>
+<arg>${GMAIL_APP_PASSWORD}</arg>
+<doc>This keyword retrieves the registration link from the
+latest email sent to the specified recipient</doc>
+<status status="PASS" start="2026-02-19T12:50:03.857398" elapsed="1.177651"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-02-19T12:50:05.036541" level="INFO">Registration link received: https://mein.tagesspiegel.de/verify-token/d41b2695fabc8b10dec343f736c334faae9cf971?utm_source=optin-email&amp;amp;utm_medium=email&amp;amp;utm_campaign=meintgs-optin</msg>
+<arg>Registration link received: ${reg_link}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-02-19T12:50:05.035833" elapsed="0.000854"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:05.037858" level="INFO">Opening url 'https://mein.tagesspiegel.de/verify-token/d41b2695fabc8b10dec343f736c334faae9cf971?utm_source=optin-email&amp;amp;utm_medium=email&amp;amp;utm_campaign=meintgs-optin'</msg>
+<arg>${reg_link}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-02-19T12:50:05.037508" elapsed="1.854997"/>
+</kw>
+<kw name="Verify Password Set Page Is Open" owner="NewPasswordPage">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${PASSWORD_HEADER}</arg>
+<arg>${WAIT_TIME_20SEC}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-19T12:50:06.893540" elapsed="0.044461"/>
+</kw>
+<doc>This keyword verifies that the user is on the password set page
+by checking the presence of the header "Passwort vergeben"</doc>
+<status status="PASS" start="2026-02-19T12:50:06.893074" elapsed="0.045132"/>
+</kw>
+<kw name="Fill New Password Form" owner="NewPasswordPage">
+<kw name="Generate Random String" owner="String">
+<msg time="2026-02-19T12:50:06.941342" level="INFO">${RANDOM_STRING} = DfQl</msg>
+<var>${RANDOM_STRING}</var>
+<arg>4</arg>
+<arg>[LETTERS]</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<status status="PASS" start="2026-02-19T12:50:06.940080" elapsed="0.001398"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-02-19T12:50:06.943293" level="INFO">${NEW_PASSWORD} = Welcome@1DfQl</msg>
+<var>${NEW_PASSWORD}</var>
+<arg>Welcome@1${RANDOM_STRING}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-02-19T12:50:06.942227" elapsed="0.001176"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:06.944454" level="INFO">Typing text 'Welcome@1DfQl' into text field 'xpath=//input[@id="forms/formSetPassword_password"]'.</msg>
+<arg>${NEW_PASSWORD_FIELD}</arg>
+<arg>${NEW_PASSWORD}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-19T12:50:06.943850" elapsed="0.210251"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CONFIRM_PASSWORD_FIELD}</arg>
+<arg>${WAIT_TIME_10SEC}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-19T12:50:07.154386" elapsed="0.032016"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:07.187077" level="INFO">Typing text 'Welcome@1DfQl' into text field 'xpath=//input[@id="forms/formSetPassword_password_confirmation"]'.</msg>
+<arg>${CONFIRM_PASSWORD_FIELD}</arg>
+<arg>${NEW_PASSWORD}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-19T12:50:07.186675" elapsed="0.203508"/>
+</kw>
+<doc>This keyword fills the new password form with a generated password and confirms it</doc>
+<status status="PASS" start="2026-02-19T12:50:06.939148" elapsed="0.451226"/>
+</kw>
+<kw name="Click On Submit Button By Accepting Permissions" owner="NewPasswordPage">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${SUBMIT_BUTTON}</arg>
+<arg>${WAIT_TIME_10SEC}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-19T12:50:07.391708" elapsed="0.058915"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:07.648358" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="before_password_submit.png"&gt;&lt;img src="before_password_submit.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>before_password_submit.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-02-19T12:50:07.450909" elapsed="0.197681"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:07.649569" level="INFO">Clicking element 'xpath=//button[@type='submit'] | //input[@type='submit']'.</msg>
+<arg>${SUBMIT_BUTTON}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-19T12:50:07.649042" elapsed="0.229987"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:08.081351" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="after_password_submit.png"&gt;&lt;img src="after_password_submit.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>after_password_submit.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-02-19T12:50:07.879345" elapsed="0.202237"/>
+</kw>
+<doc>This keyword clicks on the submit button to set the new password</doc>
+<status status="PASS" start="2026-02-19T12:50:07.391128" elapsed="0.690709"/>
+</kw>
+<kw name="Verify User is Logged In" owner="AccountPage">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-02-19T12:50:11.088335" level="INFO">Slept 3 seconds.</msg>
+<msg time="2026-02-19T12:50:11.088462" level="INFO">Wait for the page to load after login</msg>
+<arg>3s</arg>
+<arg>reason=Wait for the page to load after login</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-02-19T12:50:08.086709" elapsed="3.001937"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:11.222961" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="verify_logged_in_state.png"&gt;&lt;img src="verify_logged_in_state.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>verify_logged_in_state.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-02-19T12:50:11.089180" elapsed="0.133945"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:11.234256" level="INFO">Current page does not contain element 'xpath=//a[@data-gtm-link-text='Anmelden']'.</msg>
+<arg>${ANMELDEN_LINK}</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="PASS" start="2026-02-19T12:50:11.223352" elapsed="0.011063"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:11.256290" level="INFO">Current page contains text 'John'.</msg>
+<arg>${first_name}</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-02-19T12:50:11.234910" elapsed="0.021493"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:11.277448" level="INFO">Current page contains text 'Doew'.</msg>
+<arg>${last_name}</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-02-19T12:50:11.256646" elapsed="0.020918"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-02-19T12:50:11.306168" level="INFO">Current page contains text 'Mein Konto'.</msg>
+<arg>Mein Konto</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-02-19T12:50:11.278342" elapsed="0.027962"/>
+</kw>
+<msg time="2026-02-19T12:50:11.306481" level="INFO">${has_mein_konto} = True</msg>
+<var>${has_mein_konto}</var>
+<arg>Page Should Contain</arg>
+<arg>Mein Konto</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-02-19T12:50:11.277849" elapsed="0.028672"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${has_mein_konto}">
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<arg>Mein Bereich</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="NOT RUN" start="2026-02-19T12:50:11.307510" elapsed="0.000081"/>
+</kw>
+<status status="NOT RUN" start="2026-02-19T12:50:11.306736" elapsed="0.000935"/>
+</branch>
+<status status="PASS" start="2026-02-19T12:50:11.306701" elapsed="0.001038"/>
+</if>
+<arg>John</arg>
+<arg>Doew</arg>
+<doc>This keyword verifies that the user is logged in by checking
+the presence of the "My Account" header, URL, First Name and Last Name</doc>
+<status status="PASS" start="2026-02-19T12:50:08.084112" elapsed="3.223718"/>
+</kw>
+<doc>This test case verifies that the user can navigate to the registration page
+by clicking on the "Anmelden" button and then clicking on the "Register" tab.</doc>
+<status status="PASS" start="2026-02-19T12:49:53.844627" elapsed="17.463615"/>
+</test>
+<status status="PASS" start="2026-02-19T12:49:47.473248" elapsed="23.836187"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="e2e registration Test" id="s1" pass="1" fail="0" skip="0">e2e registration Test</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2026-02-19T12:49:47.688395" level="ERROR">Error in file 'C:\Users\PC\Documents\tagesspiegel\assessment-task-tagesspiegel\pages\HomePage.robot' on line 4: Processing variable file '../variables/common_variables.robot' failed: Importing variable file '../variables/common_variables.robot' failed: ModuleNotFoundError: No module named '.'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\PC\AppData\Local\Programs\Python\Python313\Scripts\robot.exe
+  C:\Users\PC\AppData\Local\Programs\Python\Python313\python313.zip
+  C:\Users\PC\AppData\Local\Programs\Python\Python313\DLLs
+  C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib
+  C:\Users\PC\AppData\Local\Programs\Python\Python313
+  C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\site-packages
+  C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\win32
+  C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\win32\lib
+  C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\site-packages\Pythonwin</msg>
+</errors>
+</robot>

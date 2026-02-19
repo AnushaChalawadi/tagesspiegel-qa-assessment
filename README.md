@@ -55,6 +55,38 @@ Before setting up the framework, ensure you have:
 - Gmail App Password generated
 
 ## Project Structure
+```
+  ## 📁 Project Structure
+
+assessment-task-tagesspiegel
+│
+├── pages/
+    ├── AccountPage.robot                   # Page Object Model files,
+│   ├── BasePage.robot
+│   ├── HomePage.robot
+│   ├── LoginModalPage.robot
+│   └── NewPasswordPage.robot
+│
+├── resources/                 # Reusable keywords & helpers
+│   ├── Email_helper.robot
+│
+├── variables/                 # Environment & configuration files
+│   ├── environments.yaml
+│   └── common_variables.yaml
+│
+├── tests/                     # Test cases
+│   └── e2e_registration_Test.robot
+│
+├── results/                   # Auto-generated execution reports
+│   ├── report.html
+│   ├── log.html
+│   ├── output.xml
+│   └── screenshots/
+│
+├── requirements.txt           # Python dependencies
+├── README.md                  # Project documentation
+└── .gitignore                 # Ignored files (venv, results, etc.)
+```
 
 ## Setup Instructions
 ### Step1: Clone Repository
@@ -82,7 +114,8 @@ Note: Do not use the normal gmail password
 
 ## How to Run Tests
 ```
-  robot -v ENV:PROD \
+  robot -d results \
+      -v ENV:PROD \
       -v GMAIL_USER:your_email@gmail.com \
       -v GMAIL_APP_PASSWORD:your_app_password \
       tests/e2e_registration_Test.robot
@@ -105,7 +138,7 @@ Note: Do not use the normal gmail password
 10. Verify user is logged in -> Confirm successful login with new credentials
 
 ## Test Results
-After test execution, results are automatically generated in the project directory
+After test execution, results are automatically generated in the results/ directory
 - report.html -> High-level test summary with pass/fail statistics
 - log.html -> Detailed execution log with timestamps, screenshots and debug info
 - output.xml -> Machine-readable results

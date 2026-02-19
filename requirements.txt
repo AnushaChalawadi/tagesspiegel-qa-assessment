@@ -1,0 +1,6 @@
+# core test framework
+robotframework
+# browser automation
+robotframework-seleniumlibrary
+# email handling
+rpaframework

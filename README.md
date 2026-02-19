@@ -62,6 +62,7 @@ project_root
 │
 ├── variables/                 # Environment & configuration files
 │   ├── environments.yaml
+    ├── user_data.yaml
 │   └── common_variables.yaml
 │
 ├── tests/                     # Test cases

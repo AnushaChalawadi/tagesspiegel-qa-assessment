@@ -9,6 +9,7 @@ Resource        ../pages/NewPasswordPage.robot
 Resource        ../pages/LoginModalPage.robot
 Resource        ../pages/AccountPage.robot
 Variables       ../variables/common_variables.yaml
+Variables       ../variables/user_data.yaml
 
 Suite Setup    Open Tagesspiegel Application
 
@@ -33,7 +34,7 @@ TC01 Verify that the user can navigate to the registration page
     Switch To Registration Tab
 
     # Step3: Fill the mandatory data in registration form 
-    Fill Registration Form    ${randon_email}    John    Doew
+    Fill Registration Form    ${randon_email}    ${vorname}    ${nachname}
 
     # Step4: Submit/Send the registration form
     Submit Registration Form
@@ -58,4 +59,4 @@ TC01 Verify that the user can navigate to the registration page
     Click On Submit Button By Accepting Permissions
     
     # Step10: Verify that the user is logged in by checking the presence of the user's name on the home page.
-    Verify User is Logged In     John    Doew
+    Verify User is Logged In     ${vorname}   ${nachname}

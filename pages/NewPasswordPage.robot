@@ -10,7 +10,7 @@ Library     Browser
 ${PASSWORD_HEADER}    xpath=//h3[contains(normalize-space(),'Passwort vergeben')]
 ${NEW_PASSWORD_FIELD}    xpath=//input[@id="forms/formSetPassword_password"]
 ${CONFIRM_PASSWORD_FIELD}    xpath=//input[@id="forms/formSetPassword_password_confirmation"]
-${SUBMIT_BUTTON}      xpath=//button[@type='submit'] | //input[@type='submit']  
+${SUBMIT_BUTTON}      xpath=//button[@type='submit']   
 
 *** Keywords ***
 Verify Password Set Page Is Open
@@ -37,13 +37,11 @@ Fill New Password Form
     Wait For Elements State    ${CONFIRM_PASSWORD_FIELD}    visible    timeout=10s
     Fill Text    ${CONFIRM_PASSWORD_FIELD}    ${NEW_PASSWORD}
 
-    # Submit the form
-    Wait For Elements State    ${SUBMIT_BUTTON}    visible    timeout=10s
-    Click    ${SUBMIT_BUTTON}
-
 Click On Submit Button
     [Documentation]    This keyword clicks on the submit button to set the new password
-    Sleep    2s    reason=Wait for password form submission to process
+    Wait For Elements State    ${SUBMIT_BUTTON}    visible    timeout=10s
     Take Screenshot    before_password_submit.png
     Click    ${SUBMIT_BUTTON}
     Take Screenshot    after_password_submit.png
+    Sleep    2s    reason=Wait for password form submission to process
+    

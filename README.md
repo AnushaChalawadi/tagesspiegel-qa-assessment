@@ -12,10 +12,10 @@ The Framework validates
 It is designed to be maintainable and scalable.
 
 ## Tech Stack
-- Test Automation Framework : Robot Framework 7.4.1
-- Browser Library 
-- Email Automation : `RPA.Email.ImapSmtp` (rpaframework)
-- Programming Language : Python 3.13.5 
+- Test Automation Framework : `Robot Framework` 7.4.1
+- UI Automation Library: `Browser` (Playwright-based Robot Framework library)
+- Email Automation Library: `RPA.Email.ImapSmtp` (from rpaframework)
+- Programming Language : `Python` 3.13.5 
 
 ## Design Pattern - Page Object Model(POM)
 This framework implements Page Object Model(POM) design pattern:
@@ -89,7 +89,7 @@ project_root
 ### Step2: Install Dependencies
 It is recommended to use a requirements.txt file:
 ```
-  pip install -r requirement.txt
+  pip install -r requirements.txt
 ```
 ### Step3: Gmail Setup for Email Verification
 - Create A temporary Gmail Account
@@ -110,8 +110,8 @@ Note: Do not use your personal gmail, create a temporary one
 
 ## Test Scenarios Covered
 1. Open tagesspiegel.de : Navigates to the tagesspiegel.de website based on the environment (prod/staging/test1)
-2. Click ‘Anmelden’ link : Click on Anmelden link on header to register
-3. Choose ‘Regiestieren’ tab : Select the registration tab in the login modal
+2. Click 'Anmelden' link : Click on Anmelden link on header to register
+3. Choose 'Regiestieren' tab : Select the registration tab in the login modal
 4. Fill mandatory data : Enter random email, first name, last name. 
 5. Send registration form : Submit the registration form
 6. Get registration link from email : Poll gmail inbox for confirmation email(using RPA.Email.ImapSmtp)
@@ -120,10 +120,19 @@ Note: Do not use your personal gmail, create a temporary one
 9. Send password form : Submit the password setup form
 10. Verify user is logged in : Confirm successful login with new credentials
 
+## Environment Execution
+The test supports dynamic environment execution.
+The environment is passed as a command-line variable:-v ENV:prod/staging/test1
+
 ## Test Results
 After test execution, results are automatically generated and saved in the `results/` directory
 - `report.html` : High-level test summary with pass/fail statistics
 - `log.html` : Detailed execution log with timestamps, screenshots and debug info
 - `output.xml` : Machine-readable results
 
-
+## Design Decisions
+- Browser library is used for UI interactions (Steps 1–5, 7–10)
+- RPA.Email.ImapSmtp is used for email polling and extracting the registration link (Step 6)
+- Test data (environment, user data, browser config) is externalized in YAML files
+- Dynamic email generation ensures test independence and reusability
+- Explicit waits are implemented using Browser library best practices

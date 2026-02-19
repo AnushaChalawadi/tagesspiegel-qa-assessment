@@ -6,7 +6,6 @@ Variables   ../variables/common_variables.yaml
 *** Variables ***
 ${ANMELDEN_LINK}       xpath=//a[@data-gtm-link-text='Anmelden']
 ${MODAL_IFRAME}        id=modal-iframe
-#${COOKIE_IFRAME}       xpath=//iframe[contains(@id,'sp_message_iframe')]
 ${COOKIE_IFRAME}       iframe[id*="sp_message_iframe"]
 ${COOKIE_ACCEPT_BTN}   ${COOKIE_IFRAME} >>> button.accept-all
 

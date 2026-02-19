@@ -1,64 +1,54 @@
 # Tagesspiegel E2E Registration Automation Using Robot Framework
 
 ## Overview
-This project automates the end-to-end user registration flow on 'tagesspiegel.de' using the Robot Framework and Page Object Model(POM) design pattern.
+This project automates the end-to-end user registration flow on `tagesspiegel.de` using the Robot Framework and Page Object Model(POM) design pattern.
 
 The Framework validates
-- User registration
+- User Registration
 - Email verification via Gmail
 - Password setup
 - Successful login confirmation
 
-It is designed to be maintained, scalable.
+It is designed to be maintainable and scalable.
 
 ## Tech Stack
 - Test Automation Framework : Robot Framework 7.4.1
 - Browser Automation Library : SeleniumLibrary
-- Email Automation : RPA.Email.ImapSmtp (rpaframework)
+- Email Automation : `RPA.Email.ImapSmtp` (rpaframework)
 - Programming Language : Python 3.13.5 
 
 ## Design Pattern - Page Object Model(POM)
 This framework implements Page Object Model(POM) design pattern:
-- pages/ -> Encapsulate page elements and actions for each web page
-- tests/ -> Business logic and test scenarios
-- resources/ -> Shared keywords, utilities and email helper
-- variables/ -> Environment-specific configuration
-
-## Benefits of POM
-- Improved code maintainability
-- Reduced code duplication
-- Easy to update when UI changes
-- Better test readability
-- Clean separation of concerns
+- `pages/` Encapsulate page elements and actions for each web page
+- `tests/` Business logic and test scenarios
+- `resources/` Shared keywords, utilities and email helper
+- `variables/` Environment-specific configuration
 
 ## Environment Configuration
 This framework supports multiple environments
-``` ENVIRONMENTS:
-  PROD:
-    BASE_URL: "https://www.tagesspiegel.de/"
-  STAGING:
-    BASE_URL: "https://staging.tagesspiegel.de/"
-  TEST1:
-    BASE_URL: "https://test1.tagesspiegel.de/"
+
+```yaml
+  environments:
+    prod:
+      base_url: "https://www.tagesspiegel.de/"
+    staging:
+      base_url: "https://staging.tagesspiegel.de/"
+    test1:
+      base_url: "https://test1.tagesspiegel.de/"
 ```
-Environment configuration is maintained inside the variables/ directory
 
 ## Supported Browsers
-- Chrome (default)
+- Chrome
 - Firefox
 
 ## Prerequisites
-Before setting up the framework, ensure you have:
-- Python 3.13+ installed
-- pip
-- Gmail Account with 2-step verification enabled
-- Gmail App Password generated
+- Python 3.13.x and pip3 installed
+- Gmail Account with 2-step verification enabled check [here](https://support.google.com/accounts/answer/185839) for instructions.
+- Gmail App Password generated check [here](https://support.google.com/mail/answer/185833) for instructions.
 
 ## Project Structure
 ```
-  ## 📁 Project Structure
-
-assessment-task-tagesspiegel
+project_root
 │
 ├── pages/
     ├── AccountPage.robot                   # Page Object Model files,
@@ -91,26 +81,20 @@ assessment-task-tagesspiegel
 ## Setup Instructions
 ### Step1: Clone Repository
 ```
-    git clone <repositoryName>
-    cd <repositoryName>
+    git clone https://github.com/AnushaChalawadi/tagesspiegel-qa-assessment
+    cd tagesspiegel-qa-assessment
 ```
 ### Step2: Install Dependencies
 It is recommended to use a requirements.txt file:
 ```
   pip install -r requirement.txt
 ```
-### If installing Manually
-```
-    pip install robotframework
-    pip install robotframework-seleniumlibrary
-    pip install rpaframework
-```
 ### Step3: Gmail Setup for Email Verification
-- Create Gmail Account
+- Create A temporary Gmail Account
 - Enable 2-Step Verification
 - Generate App Password
 - Copy the 16-character password
-Note: Do not use the normal gmail password
+Note: Do not use your personal gmail, create a temporary one
 
 ## How to Run Tests
 ```
@@ -121,26 +105,23 @@ Note: Do not use the normal gmail password
       tests/e2e_registration_Test.robot
 
 ```
-## Run all tests
-```
-  robot tests/
-```
-## Test Scenario Covered
-1. Open tagesspiegel.de -> Navigates to the tagesspiegel.de website based on the environment (prod/staging/test1)
-2. Click ‘Anmelden’ link -> Click on Anmelden link on header to register
-3. Choose ‘Regiestieren’ tab -> Select the registration tab in the login modal
-4. Fill mandatory data -> Enter random email, first name, last name. 
-5. Send registration form -> Submit the registration form
-6. Get registration link from email -> Poll gmail inbox for confirmation email(using RPA.Email.ImapSmtp)
-7. Open registration link -> Navigate to the confirmation link from gmail account
-8. Provide passwords -> Fill in password and password confirmation fields
-9. Send password form -> Submit the password setup form
-10. Verify user is logged in -> Confirm successful login with new credentials
+
+## Test Scenarios Covered
+1. Open tagesspiegel.de : Navigates to the tagesspiegel.de website based on the environment (prod/staging/test1)
+2. Click ‘Anmelden’ link : Click on Anmelden link on header to register
+3. Choose ‘Regiestieren’ tab : Select the registration tab in the login modal
+4. Fill mandatory data : Enter random email, first name, last name. 
+5. Send registration form : Submit the registration form
+6. Get registration link from email : Poll gmail inbox for confirmation email(using RPA.Email.ImapSmtp)
+7. Open registration link : Navigate to the confirmation link from gmail account
+8. Provide passwords : Fill in password and password confirmation fields
+9. Send password form : Submit the password setup form
+10. Verify user is logged in : Confirm successful login with new credentials
 
 ## Test Results
-After test execution, results are automatically generated in the results/ directory
-- report.html -> High-level test summary with pass/fail statistics
-- log.html -> Detailed execution log with timestamps, screenshots and debug info
-- output.xml -> Machine-readable results
+After test execution, results are automatically generated and saved in the `results/` directory
+- report.html : High-level test summary with pass/fail statistics
+- log.html : Detailed execution log with timestamps, screenshots and debug info
+- output.xml : Machine-readable results
 
 

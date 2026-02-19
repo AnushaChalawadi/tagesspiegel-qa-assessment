@@ -1,3 +1,7 @@
-PROD_BASE_URL: "https://www.tagesspiegel.de/"
-STAGING_BASE_URL: "https://staging.tagesspiegel.de/"
-TEST1_BASE_URL: "https://test1.tagesspiegel.de/"
+environments:
+  prod:
+    base_url: "https://www.tagesspiegel.de/"
+  staging:
+    base_url: "https://staging.tagesspiegel.de/"
+  test1:
+    base_url: "https://test1.tagesspiegel.de/"

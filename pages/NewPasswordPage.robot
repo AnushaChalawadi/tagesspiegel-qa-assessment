@@ -2,11 +2,6 @@
 Library     Browser
 
 *** Variables ***
-# ${PASSWORD_HEADER}        xpath=//h3[contains(normalize-space(),'Passwort vergeben')] 
-# ${SUBMIT_BUTTON}          css=button[type="submit"], input[type="submit"]
-# ${NEW_PASSWORD_FIELD}     input[type="password"] 
-# ${CONFIRM_PASSWORD_FIELD}     input[@id="forms/formSetPassword_password_confirmation"]  
-
 ${PASSWORD_HEADER}    xpath=//h3[contains(normalize-space(),'Passwort vergeben')]
 ${NEW_PASSWORD_FIELD}    xpath=//input[@id="forms/formSetPassword_password"]
 ${CONFIRM_PASSWORD_FIELD}    xpath=//input[@id="forms/formSetPassword_password_confirmation"]

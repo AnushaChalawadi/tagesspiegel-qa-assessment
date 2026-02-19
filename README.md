@@ -122,7 +122,8 @@ Note: Do not use your personal gmail, create a temporary one
 
 ## Environment Execution
 The test supports dynamic environment execution.
-The environment is passed as a command-line variable:-v ENV:prod/staging/test1
+The environment is passed as a command-line variable:
+ - -v ENV:prod/staging/test1
 
 ## Test Results
 After test execution, results are automatically generated and saved in the `results/` directory

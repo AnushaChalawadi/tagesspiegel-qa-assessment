@@ -13,7 +13,7 @@ Verify User Is Logged In
 
     [Arguments]    ${first_name}    ${last_name}
 
-    Wait For Load State    networkidle    timeout=10s
+    Wait For Load State    networkidle    timeout=20s
     Wait For Elements State    ${USER_NAME_HEADING}    visible    timeout=10s
 
     # Verify "Anmelden" model is NOT visible

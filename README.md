@@ -13,7 +13,7 @@ It is designed to be maintainable and scalable.
 
 ## Tech Stack
 - Test Automation Framework : Robot Framework 7.4.1
-- Browser Automation Library : SeleniumLibrary
+- Browser Library 
 - Email Automation : `RPA.Email.ImapSmtp` (rpaframework)
 - Programming Language : Python 3.13.5 
 
@@ -38,8 +38,9 @@ This framework supports multiple environments
 ```
 
 ## Supported Browsers
-- Chrome
-- Firefox
+- chromium
+- firefox
+- webkit
 
 ## Prerequisites
 - Python 3.13.x and pip3 installed

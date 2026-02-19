@@ -1,31 +1,29 @@
 *** Settings ***
-Library     SeleniumLibrary
+Library     Browser
 Library     String
 Variables   ../variables/common_variables.yaml
 
 *** Variables ***
 ${ANMELDEN_LINK}       xpath=//a[@data-gtm-link-text='Anmelden']
 ${MODAL_IFRAME}        id=modal-iframe
-${COOKIE_IFRAME}       xpath=//iframe[contains(@id,'sp_message_iframe')]
-${ACCEPT_BUTTON}       xpath=//button[contains(.,'Alle akzeptieren')]
+#${COOKIE_IFRAME}       xpath=//iframe[contains(@id,'sp_message_iframe')]
+${COOKIE_IFRAME}       iframe[id*="sp_message_iframe"]
+${COOKIE_ACCEPT_BTN}   ${COOKIE_IFRAME} >>> button.accept-all
 
 *** Keywords ***
-Click Anmelden Modal
-    [Documentation]    Click on the Anmelden link and wait for the login modal to appear
-    Wait Until Element Is Visible    ${ANMELDEN_LINK}    ${WAIT_TIME_10SEC}
-    Click Element    ${ANMELDEN_LINK}
-    Wait Until Element Is Visible    ${MODAL_IFRAME}    ${WAIT_TIME_10SEC}
-
 Accept Cookies If Present
-    [Documentation]    Accepts cookies if the cookie banner is present on the page
-    ${iframe_exists}=    Run Keyword And Return Status
-    ...    Element Should Be Visible    ${COOKIE_IFRAME}
-
-    IF    ${iframe_exists}
-        Select Frame    ${COOKIE_IFRAME}
-        Wait Until Element Is Visible    ${ACCEPT_BUTTON}    ${WAIT_TIME_10SEC}
-        Click Element    ${ACCEPT_BUTTON}
-        Unselect Frame
-        Wait Until Page Does Not Contain Element    ${COOKIE_IFRAME}    ${WAIT_TIME_10SEC}
-
+    [Documentation]    This keyword accepts cookies if the cookie banner is present on the page
+    ${iframe_found}=    Run Keyword And Return Status
+    ...    Wait For Elements State    ${COOKIE_IFRAME}    visible    timeout=10s
+    # click the accept button if the iframe is found
+    IF    ${iframe_found}
+        Click    ${COOKIE_ACCEPT_BTN}
+        Sleep    2s    reason=Wait for cookie popup to close
     END
+
+Click Anmelden Modal
+    [Documentation]    Clicks the 'Anmelden' (login) modal in the page header
+    Wait For Elements State    ${ANMELDEN_LINK}    visible    timeout=15s
+    Click    ${ANMELDEN_LINK}
+    
+

@@ -1,7 +1,12 @@
 *** Settings ***
-Library     SeleniumLibrary
+Library     Browser
 
 *** Variables ***
+# ${PASSWORD_HEADER}        xpath=//h3[contains(normalize-space(),'Passwort vergeben')] 
+# ${SUBMIT_BUTTON}          css=button[type="submit"], input[type="submit"]
+# ${NEW_PASSWORD_FIELD}     input[type="password"] 
+# ${CONFIRM_PASSWORD_FIELD}     input[@id="forms/formSetPassword_password_confirmation"]  
+
 ${PASSWORD_HEADER}    xpath=//h3[contains(normalize-space(),'Passwort vergeben')]
 ${NEW_PASSWORD_FIELD}    xpath=//input[@id="forms/formSetPassword_password"]
 ${CONFIRM_PASSWORD_FIELD}    xpath=//input[@id="forms/formSetPassword_password_confirmation"]
@@ -11,7 +16,7 @@ ${SUBMIT_BUTTON}      xpath=//button[@type='submit'] | //input[@type='submit']
 Verify Password Set Page Is Open
     [Documentation]    This keyword verifies that the user is on the password set page 
     ...    by checking the presence of the header "Passwort vergeben"
-    Wait Until Element Is Visible    ${PASSWORD_HEADER}    ${WAIT_TIME_20SEC}
+    Wait For Elements State    ${PASSWORD_HEADER}    visible    timeout=20s
 
 Fill New Password Form
     [Documentation]    This keyword fills the new password form with a generated password and confirms it
@@ -20,17 +25,25 @@ Fill New Password Form
     # we also recommend at least one uppercase letter, 
     # one lowercase letter and special characters)
 
-    #Generate a random password if not provided
+    # Generate a password 
     ${RANDOM_STRING}=    Generate Random String    4    [LETTERS]
+    ${NEW_PASSWORD}=     Set Variable    Welcome@1${RANDOM_STRING}
 
-    ${NEW_PASSWORD}=    Set Variable    Welcome@1${RANDOM_STRING}
-    Input Text    ${NEW_PASSWORD_FIELD}    ${NEW_PASSWORD}
-    Wait Until Element Is Visible    ${CONFIRM_PASSWORD_FIELD}    ${WAIT_TIME_10SEC}
-    Input Text    ${CONFIRM_PASSWORD_FIELD}    ${NEW_PASSWORD}
+    # Wait until password field is visible and fill it
+    Wait For Elements State    ${NEW_PASSWORD_FIELD}    visible    timeout=10s
+    Fill Text    ${NEW_PASSWORD_FIELD}    ${NEW_PASSWORD}
 
-Click On Submit Button By Accepting Permissions
+    # Wait until confirm password field is visible and fill it
+    Wait For Elements State    ${CONFIRM_PASSWORD_FIELD}    visible    timeout=10s
+    Fill Text    ${CONFIRM_PASSWORD_FIELD}    ${NEW_PASSWORD}
+
+    # Submit the form
+    Wait For Elements State    ${SUBMIT_BUTTON}    visible    timeout=10s
+    Click    ${SUBMIT_BUTTON}
+
+Click On Submit Button
     [Documentation]    This keyword clicks on the submit button to set the new password
-    Wait Until Element Is Visible    ${SUBMIT_BUTTON}    ${WAIT_TIME_10SEC}
-    Capture Page Screenshot    before_password_submit.png
-    Click Element    ${SUBMIT_BUTTON}
-    Capture Page Screenshot    after_password_submit.png
+    Sleep    2s    reason=Wait for password form submission to process
+    Take Screenshot    before_password_submit.png
+    Click    ${SUBMIT_BUTTON}
+    Take Screenshot    after_password_submit.png

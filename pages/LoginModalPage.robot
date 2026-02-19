@@ -1,40 +1,32 @@
 *** Settings ***
-Library     SeleniumLibrary
 Library     String
 
 *** Variables ***
-${MODAL_IFRAME}        id=modal-iframe
-${REGISTER_TAB}        xpath=//button[@id='tab-register']
-${EMAIL_FIELD}         xpath=//input[@id="forms/formRegistration_email"]
-${FIRST_NAME_FIELD}    xpath=//input[@id="forms/formRegistration_forename"]
-${SURNAME_FIELD}       xpath=//input[@id="forms/formRegistration_surname"]
-${REGISTER_BUTTON}     xpath=//button[.//span[normalize-space()='Jetzt registrieren']]
+# In the Browser library, the >>> operator is used to pierce into another DOM context,
+${MODAL_IFRAME}          iframe#modal-iframe
+${REGISTER_TAB}          ${MODAL_IFRAME} >>> button#tab-register
+${EMAIL_FIELD}           ${MODAL_IFRAME} >>> input#forms\\/formRegistration_email    
+${FIRST_NAME_FIELD}      ${MODAL_IFRAME} >>> input#forms\\/formRegistration_forename  
+${SURNAME_FIELD}         ${MODAL_IFRAME} >>> input#forms\\/formRegistration_surname  
+${REGISTER_BUTTON}       ${MODAL_IFRAME} >>> button:has(span:text("Jetzt registrieren"))
 
 *** Keywords ***
-Switch To Login Iframe
-    [Documentation]    This keyword switches to the login modal iframe 
-    ...    and waits for the registration tab to be visible.
-    Wait Until Element Is Visible    ${MODAL_IFRAME}    ${WAIT_TIME_20SEC}
-    Select Frame    ${MODAL_IFRAME}
-    Wait Until Element Is Visible    ${REGISTER_TAB}    ${WAIT_TIME_20SEC}
-
 Switch To Registration Tab
     [Documentation]    This keyword clicks on the "Registrieren" tab to switch to the registration form.
-    Switch To Login Iframe
-    Wait Until Element Is Visible    ${REGISTER_TAB}    ${WAIT_TIME_20SEC}
-    Click Element    ${REGISTER_TAB}
+    Wait For Elements State    ${REGISTER_TAB}    visible    timeout=15s
+    Click    ${REGISTER_TAB}
 
 Fill Registration Form 
     [Documentation]    This keyword fills the registration form with email, first name and surname. 
     [Arguments]    ${email}    ${first_name}    ${last_name}
-    Wait Until Element Is Visible    ${EMAIL_FIELD}    ${WAIT_TIME_20SEC}
-    Input Text    ${EMAIL_FIELD}            ${email}
-    Input Text    ${FIRST_NAME_FIELD}       ${first_name}
-    Input Text    ${SURNAME_FIELD}          ${last_name}
+    Wait For Elements State    ${EMAIL_FIELD}    visible    timeout=10s
+    Fill Text    ${EMAIL_FIELD}            ${email}
+    Fill Text    ${FIRST_NAME_FIELD}       ${first_name}
+    Fill Text    ${SURNAME_FIELD}          ${last_name}
 
 Submit Registration Form
     [Documentation]    This keyword clicks on the "Jetzt registrieren" button to submit the registration form.
-    Wait Until Element Is Visible    ${REGISTER_BUTTON}    ${WAIT_TIME_20SEC}
-    Capture Page Screenshot    before_submit.png
-    Click Element    ${REGISTER_BUTTON}
-    Capture Page Screenshot    after_submit.png
+    Wait For Elements State    ${REGISTER_BUTTON}    visible    timeout=15s
+    Take Screenshot    before_submit.png
+    Click    ${REGISTER_BUTTON}
+    Take Screenshot    after_submit.png

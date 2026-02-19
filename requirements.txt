@@ -1,6 +1,8 @@
 # core test framework
 robotframework
 # browser automation
-robotframework-seleniumlibrary
+robotframework-browser
+# node dependency for browser automation
+rfbrowser init
 # email handling
 rpaframework

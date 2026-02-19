@@ -1,5 +1,5 @@
 *** Settings ***
-Library         SeleniumLibrary
+Library         Browser
 Library         String
 Library         DateTime
 Resource        ../pages/BasePage.robot
@@ -26,18 +26,23 @@ TC01 Verify that the user can navigate to the registration page
     ${timestamp}=    Get Current Date    result_format=%Y%m%d%H%M%S
     ${email_prefix}=    Evaluate    '${GMAIL_USER}'.split('@')[0]
     ${randon_email}=    Set Variable    ${email_prefix}+${timestamp}@gmail.com
-    
-    # Step1: Click on "Anmelden" button
+
     Click Anmelden Modal
-
-    # Step2: Choose "Register" tab in login modal
     Switch To Registration Tab
-
-    # Step3: Fill the mandatory data in registration form 
     Fill Registration Form    ${randon_email}    ${vorname}    ${nachname}
-
-    # Step4: Submit/Send the registration form
     Submit Registration Form
+    
+    # # Step1: Click on "Anmelden" button
+    # Click Anmelden Modal
+
+    # # Step2: Choose "Register" tab in login modal
+    # Switch To Registration Tab
+
+    # # Step3: Fill the mandatory data in registration form 
+    # Fill Registration Form    ${randon_email}    ${vorname}    ${nachname}
+
+    # # Step4: Submit/Send the registration form
+    # Submit Registration Form
 
     # Step5: Get the registration link from email and navigate to that link
     ${reg_link}=    Get Registration Link From Email    
@@ -54,9 +59,11 @@ TC01 Verify that the user can navigate to the registration page
     
     # Step8: Fill the new password form with a generated password and confirm it.
     Fill New Password Form
-    
-    # Step9: Click on the submit button to set the new password.
-    Click On Submit Button By Accepting Permissions
-    
-    # Step10: Verify that the user is logged in by checking the presence of the user's name on the home page.
+    Click On Submit Button
     Verify User is Logged In     ${vorname}   ${nachname}
+    
+    # # Step9: Click on the submit button to set the new password.
+    # Click On Submit Button By Accepting Permissions
+    
+    # # Step10: Verify that the user is logged in by checking the presence of the user's name on the home page.
+    # Verify User is Logged In     ${vorname}   ${nachname}

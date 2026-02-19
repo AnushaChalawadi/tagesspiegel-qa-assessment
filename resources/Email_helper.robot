@@ -6,7 +6,7 @@ Library    Collections
 
 *** Variables ***
 ${IMAP_SERVER}       imap.gmail.com
-${iMAP_PORT}         993
+${IMAP_PORT}         993
 
 
 *** Keywords ***
@@ -14,14 +14,14 @@ Get Registration Link From Email
     [Documentation]    This keyword retrieves the registration link from the 
     ...    latest email sent to the specified recipient
 
-    [Arguments]    ${recipient_email}    ${gmail_user}    ${gmail_password}    
+    [Arguments]    ${recipient_email}    ${gmail_user}    ${gmail_app_password}    
 
     #Authorize the IMAP Connection
     Authorize Imap
     ...    account=${gmail_user}    
-    ...    password=${gmail_password}      
+    ...    password=${gmail_app_password}      
     ...    imap_server=${IMAP_SERVER}
-    ...    imap_port=${iMAP_PORT}
+    ...    imap_port=${IMAP_PORT}
                 
     ${registration_link}=   Wait For Registration Email    ${recipient_email}
 

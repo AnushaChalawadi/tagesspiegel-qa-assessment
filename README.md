@@ -99,7 +99,7 @@ Note: Do not use your personal gmail, create a temporary one
 ## How to Run Tests
 ```
   robot -d results \
-      -v ENV:PROD \
+      -v ENV:prod \
       -v GMAIL_USER:your_email@gmail.com \
       -v GMAIL_APP_PASSWORD:your_app_password \
       tests/e2e_registration_Test.robot
@@ -120,8 +120,8 @@ Note: Do not use your personal gmail, create a temporary one
 
 ## Test Results
 After test execution, results are automatically generated and saved in the `results/` directory
-- report.html : High-level test summary with pass/fail statistics
-- log.html : Detailed execution log with timestamps, screenshots and debug info
-- output.xml : Machine-readable results
+- `report.html` : High-level test summary with pass/fail statistics
+- `log.html` : Detailed execution log with timestamps, screenshots and debug info
+- `output.xml` : Machine-readable results
 
 

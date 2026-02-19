@@ -59,7 +59,3 @@ TC01 Verify that the user can navigate to the registration page
     
     # Step10: Verify that the user is logged in by checking the presence of the user's name on the home page.
     Verify User is Logged In     ${VORNAME}    ${NACHNAME}
-
-
-
-   

@@ -29,7 +29,3 @@ Accept Cookies If Present
         Wait Until Page Does Not Contain Element    ${COOKIE_IFRAME}    ${WAIT_TIME_10SEC}
 
     END
-
-
-
-    

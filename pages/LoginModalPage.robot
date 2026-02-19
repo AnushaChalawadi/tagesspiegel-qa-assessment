@@ -38,6 +38,3 @@ Submit Registration Form
     Capture Page Screenshot    before_submit.png
     Click Element    ${REGISTER_BUTTON}
     Capture Page Screenshot    after_submit.png
-    
-
-   
